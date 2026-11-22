@@ -1,0 +1,14 @@
+diff --git a/pmxge/content/validator.py b/pmxge/content/validator.py
+index b3234c6..e97788f 100644
+--- a/pmxge/content/validator.py
++++ b/pmxge/content/validator.py
+@@ -10,7 +10,8 @@ import re
+ from dataclasses import dataclass, field
+ 
+ MAX_TWEET_CHARS = 280
+-_URL_RE = re.compile(r"https?://|www\.\w")
++_URL_RE = re.compile(
++    r"https?://|www\.\w|\b[a-z0-9-]+\.(?:com|io|xyz|org|net|ai|co|app|dev)\b", re.I)
+ _MENTION_RE = re.compile(r"@\w+")
+ 
+ # Off-topic drift guard: the account is prediction markets, not crypto generally.

@@ -1,0 +1,15 @@
+diff --git a/pmxge/monitoring/reply_fetcher.py b/pmxge/monitoring/reply_fetcher.py
+index 82a0d88..42303ea 100644
+--- a/pmxge/monitoring/reply_fetcher.py
++++ b/pmxge/monitoring/reply_fetcher.py
+@@ -272,6 +272,9 @@ def _parse_ts(value: str | None) -> datetime:
+     if not value:
+         return datetime.now(timezone.utc)
+     try:
+-        return datetime.fromisoformat(value.replace("Z", "+00:00"))
++        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+     except ValueError:
+         return datetime.now(timezone.utc)
++    if parsed.tzinfo is None:
++        parsed = parsed.replace(tzinfo=timezone.utc)
++    return parsed

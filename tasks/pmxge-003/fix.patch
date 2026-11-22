@@ -1,0 +1,13 @@
+diff --git a/pmxge/content/scorer.py b/pmxge/content/scorer.py
+index a5684ee..4625c25 100644
+--- a/pmxge/content/scorer.py
++++ b/pmxge/content/scorer.py
+@@ -30,7 +30,7 @@ _INVITE_RE = re.compile(
+     r"tell me why|am i wrong|which side)\b", re.I)
+ _BAIT_RE = re.compile(
+     r"\b(like and (retweet|repost)|drop a|comment below|smash that|follow for more|"
+-    r"retweet if|tag someone|who else|thoughts\?$|agree\?$)\b", re.I)
++    r"retweet if|tag someone|who else)\b|\b(thoughts|agree)\?\s*$", re.I)
+ _MICROSTRUCTURE_RE = re.compile(
+     r"\b(depth|liquidity|book|spread|slippage|fill|order flow|size|carry|fee drag|"
+     r"resolution criteria|base rate)\b", re.I)

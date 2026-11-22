@@ -1,0 +1,13 @@
+id: trend-002
+repo: Anondevnet/trend-intelligence
+base_commit: f03d821a67ced77b0a7ae7966589e2914f4f54de
+base_branch: main
+title: to_iso_unix treats booleans as Unix timestamps
+body: |
+  `to_iso_unix(True)` returns `1970-01-01T00:00:01.000000Z` because `bool` is a subclass of `int`. Some feeds put `true`/`false` in fields we read as timestamps, and those rows end up dated 1970.
+
+  Expected: booleans return `None` like other non-numeric values; real ints/floats keep working.
+import_roots: src
+difficulty: easy
+category: types
+source: real

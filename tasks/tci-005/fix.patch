@@ -1,0 +1,17 @@
+diff --git a/app/feeds.py b/app/feeds.py
+index ae1d9cc..ae225b9 100644
+--- a/app/feeds.py
++++ b/app/feeds.py
+@@ -67,6 +67,12 @@ def _extract_image_url(entry: Any) -> str | None:
+         # media_content is a list; pick the first with a url and an image type
+         for item in media_content:
+             url = item.get('url')
++            media_type = str(item.get('type') or '').lower()
++            medium = str(item.get('medium') or '').lower()
++            if media_type and not media_type.startswith('image/'):
++                continue
++            if medium and medium != 'image':
++                continue
+             if url:
+                 return url
+ 

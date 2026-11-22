@@ -1,0 +1,16 @@
+diff --git a/src/audit_rag/chunk/chunker.py b/src/audit_rag/chunk/chunker.py
+index ea83c64..62c1660 100644
+--- a/src/audit_rag/chunk/chunker.py
++++ b/src/audit_rag/chunk/chunker.py
+@@ -27,7 +27,10 @@ def parse_front_matter(text: str) -> tuple[dict[str, str], str]:
+         if ":" not in line:
+             continue
+         key, _, value = line.partition(":")
+-        meta[key.strip()] = value.strip()
++        value = value.strip()
++        if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
++            value = value[1:-1]
++        meta[key.strip()] = value
+     body = text[match.end() :]
+     return meta, body
+ 

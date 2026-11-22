@@ -1,0 +1,21 @@
+id: arag-002
+repo: Anondevnet/audit-rag-assistant
+base_commit: cdc07c116975fe4339377879759e977dc3171c17
+base_branch: main
+title: Quoted front-matter values keep their quotes
+body: |
+  Front matter values written YAML-style with quotes, e.g.
+
+  ```
+  ---
+  title: "Reentrancy: basics"
+  ---
+  ```
+
+  come out of `parse_front_matter` as `'"Reentrancy: basics"'`, so search results show the title wrapped in quotes. (Quoting is needed when a value contains a colon.)
+
+  Expected: matching surrounding single or double quotes are removed. Unquoted values, and values that only contain quotes inside, are unchanged.
+import_roots: src
+difficulty: easy
+category: parsing
+source: real

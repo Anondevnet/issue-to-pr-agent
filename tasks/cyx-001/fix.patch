@@ -1,0 +1,13 @@
+diff --git a/cyberintel/config.py b/cyberintel/config.py
+index 41cc29f..0bf173d 100644
+--- a/cyberintel/config.py
++++ b/cyberintel/config.py
+@@ -21,6 +21,8 @@ def _load_dotenv(path: Path) -> None:
+             continue
+         key, _, value = line.partition("=")
+         key, value = key.strip(), value.strip().strip('"').strip("'")
++        if key.startswith("export "):
++            key = key[len("export "):].strip()
+         if key and key not in os.environ:
+             os.environ[key] = value
+ 

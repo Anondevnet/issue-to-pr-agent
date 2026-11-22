@@ -1,0 +1,13 @@
+id: tci-002
+repo: Anondevnet/telegram-content-intelligence
+base_commit: 2bbe5922952e50169514d524c96cf06e27aa57c5
+base_branch: main
+title: Trailing slash isn't removed when the URL has a query string
+body: |
+  `normalize_url("https://x.com/a/?q=1")` returns `https://x.com/a/?q=1`, while `normalize_url("https://x.com/a?q=1")` returns `https://x.com/a?q=1`. The trailing-slash rule only looks at the end of the whole URL, so any URL with a query keeps the slash and dedupe misses it.
+
+  Expected: the trailing slash on the path is removed whether or not there is a query string.
+import_roots: .
+difficulty: easy
+category: url
+source: real

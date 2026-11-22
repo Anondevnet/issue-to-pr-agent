@@ -1,0 +1,13 @@
+id: tci-001
+repo: Anondevnet/telegram-content-intelligence
+base_commit: 2bbe5922952e50169514d524c96cf06e27aa57c5
+base_branch: main
+title: normalize_url doesn't sort query params, so reordered URLs aren't deduped
+body: |
+  The docstring of `normalize_url` in `app/dedupe.py` says it will "sort query params", but it doesn't. The same article shared as `https://x.com/a?b=2&a=1` and `https://x.com/a?a=1&b=2` gets two different hashes and is posted twice.
+
+  Expected: query parameters are sorted so both URLs normalize to the same string. Fragment removal and trailing-slash handling should keep working.
+import_roots: .
+difficulty: easy
+category: url
+source: real

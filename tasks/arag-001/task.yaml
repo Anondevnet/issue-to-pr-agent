@@ -1,0 +1,13 @@
+id: arag-001
+repo: Anondevnet/audit-rag-assistant
+base_commit: cdc07c116975fe4339377879759e977dc3171c17
+base_branch: main
+title: excerpt() returns more than `width` characters for small widths
+body: |
+  `audit_rag.citations.format.excerpt(text, width)` is supposed to cap output at `width` characters, but for widths below 4 it returns longer strings: `excerpt("abcdefghij", 2)` gives `'abcdefghi...'` (12 chars) because `collapsed[: width - 3]` becomes a negative slice.
+
+  Expected: `len(excerpt(text, width)) <= width` for every width >= 0 (for width <= 3, just hard-truncate without an ellipsis). Behaviour for normal widths is unchanged.
+import_roots: src
+difficulty: easy
+category: string
+source: real

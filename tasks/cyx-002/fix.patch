@@ -1,0 +1,15 @@
+diff --git a/cyberintel/sources/awesome_hacking.py b/cyberintel/sources/awesome_hacking.py
+index 4149d36..c10fba4 100644
+--- a/cyberintel/sources/awesome_hacking.py
++++ b/cyberintel/sources/awesome_hacking.py
+@@ -22,7 +22,9 @@ README_URL = "https://raw.githubusercontent.com/Hack-with-Github/Awesome-Hacking
+ # Sections whose rows are themselves curated awesome-lists (each one becomes a category).
+ LIST_SECTIONS = {"Awesome Repositories"}
+ 
+-_ROW = re.compile(r"^\s*\|?\s*\[(?P<name>[^\]]+)\]\((?P<url>[^)\s]+)\)\s*\|\s*(?P<desc>.*?)\s*\|?\s*$")
++_ROW = re.compile(
++    r"^\s*\|?\s*\[(?P<name>[^\]]+)\]\((?P<url>[^()\s]+(?:\([^()\s]*\)[^()\s]*)*)\)"
++    r"\s*\|\s*(?P<desc>.*?)\s*\|?\s*$")
+ _HEADING = re.compile(r"^(#{2,6})\s+(?P<title>.+?)\s*$")
+ 
+ 

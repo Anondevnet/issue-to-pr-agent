@@ -1,0 +1,13 @@
+id: trend-001
+repo: Anondevnet/trend-intelligence
+base_commit: f03d821a67ced77b0a7ae7966589e2914f4f54de
+base_branch: main
+title: Trend slugs can end in '-' after truncation to 80 chars
+body: |
+  `liquidmexx.trends.identity.slugify` strips dashes and then truncates to 80 characters, so a long narrative name whose 80th character is a separator produces a slug ending in `-` (e.g. `ai/aaaa...a-`). Those slugs look broken in the dashboard and don't match the same name typed slightly differently.
+
+  Expected: slugs never end (or start) with `-` and stay at most 80 chars.
+import_roots: src
+difficulty: easy
+category: string
+source: real

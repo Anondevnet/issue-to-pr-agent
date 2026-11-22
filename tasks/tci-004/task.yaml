@@ -1,0 +1,15 @@
+id: tci-004
+repo: Anondevnet/telegram-content-intelligence
+base_commit: 2bbe5922952e50169514d524c96cf06e27aa57c5
+base_branch: main
+title: _safe_text_list crashes on a set that contains a non-string
+body: |
+  `_safe_text_list` in `app/intelligence/models.py` skips non-string items in lists, but if a provider sends the labels as a set that mixes types, it calls `sorted(value)` first and raises `TypeError: '<' not supported between instances of 'int' and 'str'`.
+
+  Repro: `_safe_text_list({"b", 1, "a"})`
+
+  Expected: `("a", "b")`, same as the list behaviour (non-strings dropped, deterministic order).
+import_roots: .
+difficulty: easy
+category: types
+source: real

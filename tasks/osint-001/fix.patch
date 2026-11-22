@@ -1,0 +1,13 @@
+diff --git a/server.py b/server.py
+index 147d7c8..655123e 100644
+--- a/server.py
++++ b/server.py
+@@ -248,7 +248,7 @@ def normalize_query(raw_query: str) -> str:
+         if any(ord(char) < 32 for char in value) or len(value) > 200:
+             raise DashboardError(400, "bad_request", "That filter value is not valid.")
+         if key in {"limit", "offset"}:
+-            if not value.isdigit():
++            if not (value.isascii() and value.isdigit()):
+                 raise DashboardError(400, "bad_request", "Limit and offset must be whole numbers.")
+             number = int(value)
+             if key == "limit" and not 1 <= number <= 5000:

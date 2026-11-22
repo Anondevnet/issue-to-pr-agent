@@ -1,0 +1,13 @@
+id: cyx-001
+repo: Anondevnet/cyberintel-x
+base_commit: 19a81bfcfe1dbc596deeba4ea7e8fa1ce5a71b1b
+base_branch: main
+title: .env lines with `export KEY=value` are loaded under the wrong name
+body: |
+  Many people keep `.env` files that also work with `source`, e.g. `export HF_TOKEN=hf_xxx`. `cyberintel.config._load_dotenv` sets an env var literally named `export HF_TOKEN`, so the token shows as "not configured".
+
+  Expected: an optional leading `export ` is ignored, so `export HF_TOKEN=abc` sets `HF_TOKEN`. Existing env vars must still win.
+import_roots: .
+difficulty: easy
+category: parsing
+source: real

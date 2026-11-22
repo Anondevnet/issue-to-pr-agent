@@ -1,0 +1,13 @@
+id: aiv-003
+repo: Anondevnet/ai-video-pipeline
+base_commit: e94b0358d88aaddbf1916443d475735d294a0a91
+base_branch: main
+title: A partial or non-dict state.json makes advance() crash with KeyError
+body: |
+  `load_state` falls back to a default state when the file is unreadable JSON, but if the file is valid JSON with missing keys (e.g. `{"schema_version": 1}` left by an interrupted hand edit) or isn't an object at all (`[]`), it is returned as-is. The next `advance()` then fails with `KeyError: 'concepts'` (or a TypeError for the list case).
+
+  Expected: `load_state` always returns a dict with the default keys (`schema_version`, `last_stage`, `concepts`, `updated_at`, `history`); keys present in the file are kept.
+import_roots: src
+difficulty: medium
+category: robustness
+source: real

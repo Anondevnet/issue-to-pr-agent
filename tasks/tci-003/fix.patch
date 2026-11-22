@@ -1,0 +1,27 @@
+diff --git a/app/security.py b/app/security.py
+index 4a48937..c73b7c2 100644
+--- a/app/security.py
++++ b/app/security.py
+@@ -1,6 +1,7 @@
+ """Small security helpers shared by formatters and external-call boundaries."""
+ 
+ import ipaddress
++import socket
+ import re
+ import unicodedata
+ from urllib.parse import urlsplit
+@@ -88,6 +89,14 @@ def safe_public_https_url(
+         # Single-label names are local-network names, not public destinations.
+         if "." not in host:
+             return None
++        # Shorthand/hex/octal IPv4 forms (127.1, 0x7f.0.0.1) that the C resolver accepts.
++        try:
++            packed = socket.inet_aton(host)
++        except OSError:
++            pass
++        else:
++            if not ipaddress.ip_address(packed).is_global:
++                return None
+     else:
+         if not address.is_global:
+             return None

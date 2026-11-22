@@ -1,0 +1,15 @@
+# Union of test dependencies for the task repos (all pure-Python or with arm64 wheels).
+pytest>=8,<9
+respx>=0.21
+httpx>=0.27,<1
+fastapi>=0.110
+jinja2>=3.1
+pydantic>=2.7,<3
+pydantic-settings>=2.3,<3
+pyyaml>=6.0,<7
+feedparser>=6.0.11,<7
+requests>=2.31
+python-dotenv>=1.0
+anthropic>=1,<2
+numpy>=1.26
+sqlite-vec>=0.1.6

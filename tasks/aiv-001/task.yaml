@@ -1,0 +1,13 @@
+id: aiv-001
+repo: Anondevnet/ai-video-pipeline
+base_commit: e94b0358d88aaddbf1916443d475735d294a0a91
+base_branch: main
+title: validate_concept_dict accepts beats that aren't a list
+body: |
+  If the planner/LLM returns `"beats": "intro, middle, end"` (a string), `validate_concept_dict` returns no errors, and the pipeline crashes later when it iterates beats as dicts.
+
+  Expected: a non-list `beats` value produces a validation error (e.g. `"beats must be a list"`). Lists with fewer than 3 beats keep the existing `"need >= 3 beats"` error.
+import_roots: src
+difficulty: easy
+category: validation
+source: real

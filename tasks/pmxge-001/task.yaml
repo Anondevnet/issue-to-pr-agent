@@ -1,0 +1,14 @@
+id: pmxge-001
+repo: Anondevnet/polymarket-x-growth-engine
+base_commit: 0c7764bb30bf6d7ecaf77e1c392779fc57e538ef
+base_branch: main
+title: Validator warns 'no prediction-market anchor' on drafts that quote a percentage
+body: |
+  A draft like "Trump is trading at 62% today" gets the warning `no explicit prediction-market anchor detected` from `validate_draft`, even though the on-topic list in `pmxge/content/validator.py` includes `%`.
+
+  Expected: a percentage such as `62%` or `12.5 %` counts as an on-topic anchor, so no warning.
+  Actual: the warning is always added when the only anchor is a percentage.
+import_roots: .
+difficulty: easy
+category: regex
+source: real

@@ -1,0 +1,13 @@
+id: tci-003
+repo: Anondevnet/telegram-content-intelligence
+base_commit: 2bbe5922952e50169514d524c96cf06e27aa57c5
+base_branch: main
+title: safe_public_https_url accepts shorthand loopback/private IPs like https://127.1/
+body: |
+  `safe_public_https_url` is meant to reject local/private destinations before a remote image fetch. It rejects `https://127.0.0.1/` but accepts `https://127.1/latest` and `https://0x7f.0.0.1/`, because `ipaddress.ip_address` doesn't parse those forms and the hostname contains a dot. The C resolver does parse them (inet_aton), so the fetch goes to 127.0.0.1.
+
+  Expected: shorthand / hex / octal IPv4 forms that resolve to non-global addresses (127.1, 0x7f.0.0.1, 10.1, 0177.0.0.1) are rejected. Normal hostnames like `images.example.com` and public IPs keep working.
+import_roots: .
+difficulty: medium
+category: security
+source: real

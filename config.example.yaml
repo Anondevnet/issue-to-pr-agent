@@ -1,0 +1,36 @@
+# Copy to config.yaml and pass with --config config.yaml (or I2P_CONFIG=config.yaml).
+model:
+  provider: ollama                      # $0, local
+  base_url: http://127.0.0.1:11434
+  model: huihui_ai/qwen3.5-abliterated:9b
+  temperature: 0.2
+  num_ctx: 8192
+  max_output_tokens: 1024
+  think: false
+
+  # Optional free-tier comparison. OFF unless you set provider: openai_compat AND allow_hosted: true.
+  # Key is read from the env var named in api_key_env; never stored in this file. Use only ':free'
+  # models / free tiers that need no card.
+  # provider: openai_compat
+  # allow_hosted: true
+  # base_url: https://openrouter.ai/api/v1                         # OpenRouter
+  # model: qwen/qwen3-coder:free
+  # api_key_env: OPENROUTER_API_KEY
+  # base_url: https://generativelanguage.googleapis.com/v1beta/openai   # Gemini free tier
+  # model: gemini-2.5-flash
+  # api_key_env: GEMINI_API_KEY
+
+sandbox:
+  backend: docker
+  docker_cmd: docker
+  image: i2p-sandbox:py311
+  cpus: 2.0
+  memory: 2g
+  pids_limit: 256
+  network: none
+  command_timeout_s: 180
+
+agent:
+  max_steps: 40
+  max_retries: 3
+  wall_clock_s: 900

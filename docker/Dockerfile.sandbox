@@ -1,0 +1,16 @@
+# Sandbox image for issue-to-pr-agent. Multi-arch base: builds natively on Apple Silicon (arm64)
+# and on x86_64. Dependencies are baked in at build time; containers run with --network none.
+FROM python:3.11-slim
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends git ffmpeg \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY requirements-sandbox.txt /tmp/requirements-sandbox.txt
+RUN pip install --no-cache-dir -r /tmp/requirements-sandbox.txt && rm /tmp/requirements-sandbox.txt
+
+# Non-root default user (the harness also passes --user <host uid>:<host gid>).
+RUN useradd --create-home --uid 10001 sandbox
+USER sandbox
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 HOME=/tmp
+WORKDIR /work

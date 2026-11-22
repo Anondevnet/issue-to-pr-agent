@@ -1,0 +1,13 @@
+id: pmxge-002
+repo: Anondevnet/polymarket-x-growth-engine
+base_commit: 0c7764bb30bf6d7ecaf77e1c392779fc57e538ef
+base_branch: main
+title: Bare domains like polymarket.com/event/... slip past the no-links rule
+body: |
+  The validator is supposed to block links in the main post body ("links belong in the first reply"), but it only catches `http(s)://` and `www.`. A draft that says `full breakdown at polymarket.com/event/fed-cut` passes validation, and X still renders that as a link.
+
+  Please also reject bare domains (at least common TLDs like .com, .io, .xyz, .org, .net, .ai, .co, .app, .dev) in the body. Ordinary text with decimals like `0.62` or `12.5%` must not be flagged.
+import_roots: .
+difficulty: medium
+category: regex
+source: real

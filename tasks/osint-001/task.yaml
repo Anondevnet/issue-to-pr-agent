@@ -1,0 +1,15 @@
+id: osint-001
+repo: Anondevnet/osint-dashboard
+base_commit: 45fc163c5f51657026501866001875a99cf62903
+base_branch: main
+title: Unicode digits in ?limit= crash the API proxy with a 500
+body: |
+  `normalize_query` validates `limit`/`offset` with `str.isdigit()`, which is true for characters like `²` (superscript two). `int("²")` then raises `ValueError`, which escapes as a 500 instead of the friendly 400.
+
+  Repro: `normalize_query("limit=%C2%B2")` raises ValueError.
+
+  Expected: a `DashboardError` with status 400 ("Limit and offset must be whole numbers.") for any non-ASCII digits. Normal values like `limit=50` keep working.
+import_roots: .
+difficulty: easy
+category: validation
+source: real

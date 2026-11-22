@@ -1,0 +1,12 @@
+diff --git a/src/liquidmexx/sources/feeds.py b/src/liquidmexx/sources/feeds.py
+index 1e0fd97..7fc9cf6 100644
+--- a/src/liquidmexx/sources/feeds.py
++++ b/src/liquidmexx/sources/feeds.py
+@@ -125,5 +125,7 @@ class RedditAdapter(SourceAdapter):
+ 
+ 
+ def to_iso_unix(value: Any) -> str | None:
++    if isinstance(value, bool):
++        return None
+     return from_unix(float(value)) if isinstance(value, (int, float)) else None
+ 

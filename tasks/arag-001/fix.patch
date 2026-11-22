@@ -1,0 +1,13 @@
+diff --git a/src/audit_rag/citations/format.py b/src/audit_rag/citations/format.py
+index 5bdc873..115df8e 100644
+--- a/src/audit_rag/citations/format.py
++++ b/src/audit_rag/citations/format.py
+@@ -19,6 +19,8 @@ def excerpt(text: str, width: int = 240) -> str:
+     collapsed = re.sub(r"\s+", " ", text).strip()
+     if len(collapsed) <= width:
+         return collapsed
++    if width <= 3:
++        return collapsed[: max(width, 0)]
+     return collapsed[: width - 3].rstrip() + "..."
+ 
+ 

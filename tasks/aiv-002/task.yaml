@@ -1,0 +1,13 @@
+id: aiv-002
+repo: Anondevnet/ai-video-pipeline
+base_commit: e94b0358d88aaddbf1916443d475735d294a0a91
+base_branch: main
+title: Beat durations with fractional seconds are truncated
+body: |
+  `estimate_beat_seconds({"seconds": "4.5-8"})` returns `4` instead of `3.5`: each end is truncated to an int before subtracting. With several fractional beats the 12-26s total check in `Concept.validate` can be off by a couple of seconds.
+
+  Expected: return the real difference (3.5 here). Whole-number ranges like "0-4" must still give 4, and unparseable values still give 0.
+import_roots: src
+difficulty: easy
+category: numeric
+source: real

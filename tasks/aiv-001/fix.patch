@@ -1,0 +1,15 @@
+diff --git a/src/aiinf/schemas.py b/src/aiinf/schemas.py
+index 11fd38e..ca6722b 100644
+--- a/src/aiinf/schemas.py
++++ b/src/aiinf/schemas.py
+@@ -70,6 +70,9 @@ def validate_concept_dict(d: dict) -> list[str]:
+             errors.append(f"missing {f}")
+     if d.get("lane") not in LANES:
+         errors.append("bad lane")
+-    if isinstance(d.get("beats"), list) and len(d["beats"]) < 3:
++    beats = d.get("beats")
++    if beats not in (None, "", []) and not isinstance(beats, list):
++        errors.append("beats must be a list")
++    elif isinstance(beats, list) and len(beats) < 3:
+         errors.append("need >= 3 beats")
+     return errors

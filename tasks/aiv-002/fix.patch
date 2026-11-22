@@ -1,0 +1,17 @@
+diff --git a/src/aiinf/schemas.py b/src/aiinf/schemas.py
+index 11fd38e..62cc187 100644
+--- a/src/aiinf/schemas.py
++++ b/src/aiinf/schemas.py
+@@ -55,10 +55,10 @@ class Concept:
+         return errors
+ 
+ 
+-def estimate_beat_seconds(beat: dict) -> int:
++def estimate_beat_seconds(beat: dict) -> float:
+     s = str(beat.get("seconds", "0-4")).split("-")
+     try:
+-        return int(float(s[-1])) - int(float(s[0]))
++        return float(s[-1]) - float(s[0])
+     except (ValueError, IndexError):
+         return 0
+ 

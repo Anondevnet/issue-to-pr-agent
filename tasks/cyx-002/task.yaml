@@ -1,0 +1,19 @@
+id: cyx-002
+repo: Anondevnet/cyberintel-x
+base_commit: 19a81bfcfe1dbc596deeba4ea7e8fa1ce5a71b1b
+base_branch: main
+title: Awesome-Hacking rows whose URL contains parentheses are silently dropped
+body: |
+  `parse_readme` drops table rows whose link URL contains parentheses, e.g.
+
+  ```
+  | [Wiki](https://en.wikipedia.org/wiki/Metasploit_(software)) | Wikipedia page |
+  ```
+
+  The `_ROW` regex stops the URL at the first `)` and then the row no longer matches, so the entry never reaches the database and nothing is logged.
+
+  Expected: balanced parentheses inside the URL are kept, and the row parses with the full URL and description.
+import_roots: .
+difficulty: medium
+category: regex
+source: real

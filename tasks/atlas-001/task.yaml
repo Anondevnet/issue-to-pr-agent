@@ -1,0 +1,15 @@
+id: atlas-001
+repo: Anondevnet/atlas-agent
+base_commit: d54130ad98cb1b7adbe888121391cf3317338e4c
+base_branch: main
+title: Report filenames can end in '-' when the title is long
+body: |
+  `_slug` truncates to 60 characters after stripping dashes, so a long title whose 60th character falls on a separator produces a filename like `2026-11-21-1200-aaaa...a-.md`.
+
+  Repro: `_slug("a" * 59 + " bbb")` returns 59 a's followed by `-`.
+
+  Expected: slugs never start or end with `-`, and are at most 60 characters.
+import_roots: .
+difficulty: easy
+category: string
+source: real

@@ -1,0 +1,14 @@
+diff --git a/app/dedupe.py b/app/dedupe.py
+index d4efe47..d88d7f5 100644
+--- a/app/dedupe.py
++++ b/app/dedupe.py
+@@ -43,7 +43,8 @@ def normalize_url(url: str) -> str:
+     url = url.strip().lower()
+     # Remove fragment
+     parsed = urllib.parse.urlsplit(url)
+-    url = urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, parsed.query, ''))
++    query = "&".join(sorted(part for part in parsed.query.split("&") if part))
++    url = urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, query, ''))
+     # Remove trailing slash from path
+     if url.endswith('/'):
+         url = url.rstrip('/')

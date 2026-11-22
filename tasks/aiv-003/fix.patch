@@ -1,0 +1,20 @@
+diff --git a/src/aiinf/state.py b/src/aiinf/state.py
+index 305eba1..bfaa1f1 100644
+--- a/src/aiinf/state.py
++++ b/src/aiinf/state.py
+@@ -22,9 +22,14 @@ def load_state(path: Path | None = None) -> dict:
+     if not path.exists():
+         return default_state()
+     try:
+-        return json.loads(path.read_text())
++        loaded = json.loads(path.read_text())
+     except (json.JSONDecodeError, OSError):
+         return default_state()
++    if not isinstance(loaded, dict):
++        return default_state()
++    state = default_state()
++    state.update(loaded)
++    return state
+ 
+ 
+ def save_state(state: dict, path: Path | None = None) -> None:

@@ -1,0 +1,13 @@
+diff --git a/atlas_tools.py b/atlas_tools.py
+index 5e71617..a3b212e 100644
+--- a/atlas_tools.py
++++ b/atlas_tools.py
+@@ -12,7 +12,7 @@ REPORTS_DIR = Path(__file__).parent / "reports"
+ 
+ def _slug(title: str) -> str:
+     slug = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+-    return slug[:60] or "report"
++    return slug[:60].strip("-") or "report"
+ 
+ 
+ def write_report(title: str, content: str, reports_dir: Path = REPORTS_DIR) -> str:

@@ -1,0 +1,16 @@
+diff --git a/app/intelligence/models.py b/app/intelligence/models.py
+index 7a36ee7..f101ff3 100644
+--- a/app/intelligence/models.py
++++ b/app/intelligence/models.py
+@@ -119,7 +119,10 @@ def _safe_text_list(value: object, *, limit: int = 20, item_length: int = 80) ->
+     if isinstance(value, str):
+         values = [value]
+     elif isinstance(value, (list, tuple, set, frozenset)):
+-        values = sorted(value) if isinstance(value, (set, frozenset)) else list(value)
++        if isinstance(value, (set, frozenset)):
++            values = sorted(item for item in value if isinstance(item, str))
++        else:
++            values = list(value)
+     else:
+         raise TypeError("trend labels must be a sequence of text values")
+     cleaned = []

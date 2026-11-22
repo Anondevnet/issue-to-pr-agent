@@ -1,0 +1,13 @@
+id: tci-005
+repo: Anondevnet/telegram-content-intelligence
+base_commit: 2bbe5922952e50169514d524c96cf06e27aa57c5
+base_branch: main
+title: Feed image extraction picks a video from media:content instead of the image
+body: |
+  When an RSS entry's `media_content` lists a video first and an image second, `_extract_image_url` returns the .mp4 URL and we try to post it as the article photo. The code comment even says "pick the first with a url and an image type", but the type is never checked.
+
+  Expected: items whose `type` is set to something other than `image/*` (or whose `medium` is set to something other than `image`) are skipped. Items with no type/medium info are still accepted (many feeds omit it). If no media_content item qualifies, fall through to thumbnails/enclosures as before.
+import_roots: .
+difficulty: medium
+category: logic
+source: real
