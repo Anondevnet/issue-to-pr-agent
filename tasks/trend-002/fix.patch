@@ -1,7 +1,7 @@
-diff --git a/src/liquidmexx/sources/feeds.py b/src/liquidmexx/sources/feeds.py
-index 1e0fd97..7fc9cf6 100644
---- a/src/liquidmexx/sources/feeds.py
-+++ b/src/liquidmexx/sources/feeds.py
+diff --git a/src/trend_intelligence/sources/feeds.py b/src/trend_intelligence/sources/feeds.py
+index 273ed28..ab8edb6 100644
+--- a/src/trend_intelligence/sources/feeds.py
++++ b/src/trend_intelligence/sources/feeds.py
 @@ -125,5 +125,7 @@ class RedditAdapter(SourceAdapter):
  
  

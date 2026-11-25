@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/Anondevnet/issue-to-pr-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/Anondevnet/issue-to-pr-agent/actions/workflows/ci.yml)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue)](.github/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 A $0 coding agent that turns a GitHub issue into a tested pull request with a local 9B model, so you can measure end to end how many real bugs a small open model can fix inside a locked-down Docker sandbox.
 
@@ -32,7 +33,7 @@ can fix end to end, with a JSON trace for every step.
 ## Results
 
 <!-- results:start -->
-_No results yet._
+_Benchmark results pending. The harness, Docker sandbox, scoring, and all 20 tasks are in place, and `i2p verify-tasks` checks that each hidden test fails at the base commit and passes with the reference fix. The full run (20 tasks x 3 runs with a local 9B model) has not been completed yet; run it with the commands in [Quickstart (Apple Silicon Mac)](#quickstart-apple-silicon-mac) and this table is filled in by `scripts/make_table.py`._
 <!-- results:end -->
 
 Regenerate with `python scripts/make_table.py runs/<run-id> --readme README.md`.

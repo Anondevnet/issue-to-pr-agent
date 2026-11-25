@@ -1,4 +1,4 @@
-from liquidmexx.sources.feeds import to_iso_unix
+from trend_intelligence.sources.feeds import to_iso_unix
 
 
 def test_bools_are_not_timestamps():

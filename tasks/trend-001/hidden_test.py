@@ -1,4 +1,4 @@
-from liquidmexx.trends.identity import slugify
+from trend_intelligence.trends.identity import slugify
 
 
 def test_no_trailing_dash_after_truncation():

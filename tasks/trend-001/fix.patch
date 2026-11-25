@@ -1,7 +1,7 @@
-diff --git a/src/liquidmexx/trends/identity.py b/src/liquidmexx/trends/identity.py
-index 54cff3b..6cf6c8d 100644
---- a/src/liquidmexx/trends/identity.py
-+++ b/src/liquidmexx/trends/identity.py
+diff --git a/src/trend_intelligence/trends/identity.py b/src/trend_intelligence/trends/identity.py
+index f2784df..f265765 100644
+--- a/src/trend_intelligence/trends/identity.py
++++ b/src/trend_intelligence/trends/identity.py
 @@ -35,7 +35,7 @@ def normalize(text: str) -> str:
  
  
