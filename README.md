@@ -1,5 +1,25 @@
 # issue-to-pr-agent
 
+[![CI](https://github.com/Anondevnet/issue-to-pr-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/Anondevnet/issue-to-pr-agent/actions/workflows/ci.yml)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue)](.github/workflows/ci.yml)
+
+A $0 coding agent that turns a GitHub issue into a tested pull request with a local 9B model, so you can measure end to end how many real bugs a small open model can fix inside a locked-down Docker sandbox.
+
+## Quickstart
+
+The test suite runs offline with a mocked model; no Docker, Ollama, or API keys needed.
+
+```bash
+git clone https://github.com/Anondevnet/issue-to-pr-agent && cd issue-to-pr-agent
+python3.11 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+python -m pytest tests          # mocked model + local runner; real-container tests are opt-in
+python -m i2p doctor            # checks Python, Docker, Ollama, disk, and gh before a real run
+```
+
+The full benchmark (Docker sandbox + Ollama on an Apple Silicon Mac) is in [Quickstart (Apple Silicon Mac)](#quickstart-apple-silicon-mac).
+
+## Overview
+
 A small coding agent that takes a GitHub issue, reproduces it with a failing test, patches the code, runs the
 test suite (up to 3 retries) and prepares a pull request. It runs on **$0**: a local 9B model through Ollama,
 every attempt in a locked-down Docker container on an Apple Silicon Mac, and no paid APIs.
