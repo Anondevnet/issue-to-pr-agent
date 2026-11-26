@@ -30,6 +30,14 @@ can fix end to end, with a JSON trace for every step.
 
 > Status: harness, task set and tests are done. The results table below gets filled in by the first full run.
 
+## Demo
+
+CLI help, the public 15-task set, and the offline unit tests (mocked model, no Docker or API keys):
+
+![CLI help, public task list, and passing offline tests](docs/demo.gif)
+
+The full Docker + local-model benchmark is in [Quickstart (Apple Silicon Mac)](#quickstart-apple-silicon-mac).
+
 ## Results
 
 <!-- results:start -->
