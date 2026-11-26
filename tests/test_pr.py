@@ -13,7 +13,7 @@ def test_disallowed_repos(repo):
 
 
 def test_allowed_repo_case_insensitive():
-    assert assert_allowed_repo("anondevnet/atlas-agent") == (ALLOWED_OWNER, "atlas-agent")
+    assert assert_allowed_repo("anondevnet/audit-rag-assistant") == (ALLOWED_OWNER, "audit-rag-assistant")
 
 
 class FakeRunner:
@@ -30,7 +30,7 @@ class FakeRunner:
         return subprocess.CompletedProcess(args, 0, out, "")
 
 
-def _open(runner, enabled=True, repo="Anondevnet/atlas-agent", tmp_path=None):
+def _open(runner, enabled=True, repo="Anondevnet/audit-rag-assistant", tmp_path=None):
     return open_pr(repo=repo, workdir=tmp_path, branch="i2p/x", base="main", title="t",
                    body_file=tmp_path / "b.md", enabled=enabled, runner=runner)
 
@@ -43,7 +43,7 @@ def test_disabled_by_default_never_calls_out(tmp_path):
 
 def test_blocked_owner_even_in_dry_run(tmp_path):
     with pytest.raises(PRPolicyError):
-        _open(FakeRunner({}), enabled=False, repo="scottpike7-hash/atlas-agent", tmp_path=tmp_path)
+        _open(FakeRunner({}), enabled=False, repo="scottpike7-hash/audit-rag-assistant", tmp_path=tmp_path)
 
 
 def test_wrong_gh_login_blocks(tmp_path):
@@ -62,13 +62,13 @@ def test_repo_owner_mismatch_blocks(tmp_path):
 
 def test_enabled_happy_path(tmp_path):
     runner = FakeRunner({"gh api user": "Anondevnet", "gh repo view": "Anondevnet",
-                         "gh pr create": "https://github.com/Anondevnet/atlas-agent/pull/1"})
+                         "gh pr create": "https://github.com/Anondevnet/audit-rag-assistant/pull/1"})
     res = _open(runner, tmp_path=tmp_path)
     assert res.opened and res.url.endswith("/pull/1")
     push = [c for c in runner.calls if c[:2] == ["git", "push"]][0]
-    assert push[2] == "https://github.com/Anondevnet/atlas-agent.git"
+    assert push[2] == "https://github.com/Anondevnet/audit-rag-assistant.git"
     create = runner.calls[-1]
-    assert create[:5] == ["gh", "pr", "create", "--repo", "Anondevnet/atlas-agent"]
+    assert create[:5] == ["gh", "pr", "create", "--repo", "Anondevnet/audit-rag-assistant"]
 
 
 def test_branch_name_safe():

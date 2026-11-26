@@ -25,7 +25,7 @@ A small coding agent that takes a GitHub issue, reproduces it with a failing tes
 test suite (up to 3 retries) and prepares a pull request. It runs on **$0**: a local 9B model through Ollama,
 every attempt in a locked-down Docker container on an Apple Silicon Mac, and no paid APIs.
 
-The point is the measured number: how many of **20 real issues from my own repositories** a local 9B model
+The point is the measured number: how many of **15 real issues from my own public repositories** a local 9B model
 can fix end to end, with a JSON trace for every step.
 
 > Status: harness, task set and tests are done. The results table below gets filled in by the first full run.
@@ -33,7 +33,7 @@ can fix end to end, with a JSON trace for every step.
 ## Results
 
 <!-- results:start -->
-_Benchmark results pending. The harness, Docker sandbox, scoring, and all 20 tasks are in place, and `i2p verify-tasks` checks that each hidden test fails at the base commit and passes with the reference fix. The full run (20 tasks x 3 runs with a local 9B model) has not been completed yet; run it with the commands in [Quickstart (Apple Silicon Mac)](#quickstart-apple-silicon-mac) and this table is filled in by `scripts/make_table.py`._
+_Benchmark results pending. The harness, Docker sandbox, scoring, and all 15 tasks are in place, and `i2p verify-tasks` checks that each hidden test fails at the base commit and passes with the reference fix. The full run (15 tasks x 3 runs with a local 9B model) has not been completed yet; run it with the commands in [Quickstart (Apple Silicon Mac)](#quickstart-apple-silicon-mac) and this table is filled in by `scripts/make_table.py`._
 <!-- results:end -->
 
 Regenerate with `python scripts/make_table.py runs/<run-id> --readme README.md`.
@@ -93,7 +93,7 @@ With `--open-pr`, only **solved** attempts are pushed and opened, and only after
 
 ## Task set
 
-20 issues, each in `tasks/<id>/`:
+15 issues, each in `tasks/<id>/`:
 
 - `task.yaml`: repo, pinned base commit, and the issue text written the way a user would report it
 - `hidden_test.py`: the scoring test, which the agent never sees
@@ -102,7 +102,7 @@ With `--open-pr`, only **solved** attempts are pushed and opened, and only after
 These are **real bugs that exist in my repos at the pinned commits**, found by reviewing the code. They are
 not seeded. The issue text was written for this benchmark and has not been filed on GitHub. Each task is
 verified with `python -m i2p verify-tasks`: the hidden test fails on the base commit, passes with
-`fix.patch`, and the suite shows no new failures. All 20 pass in the Docker sandbox.
+`fix.patch`, and the suite shows no new failures. All 15 pass in the Docker sandbox. The public task set only includes public repositories.
 
 | ID | Repo | Difficulty | Area | Issue |
 |---|---|---|---|---|
@@ -111,14 +111,9 @@ verified with `python -m i2p verify-tasks`: the hidden test fails on the base co
 | aiv-003 | ai-video-pipeline | medium | robustness | A partial or non-dict state.json makes advance() crash with KeyError |
 | arag-001 | audit-rag-assistant | easy | string | excerpt() returns more than `width` characters for small widths |
 | arag-002 | audit-rag-assistant | easy | parsing | Quoted front-matter values keep their quotes |
-| atlas-001 | atlas-agent | easy | string | Report filenames can end in '-' when the title is long |
 | cyx-001 | cyberintel-x | easy | parsing | .env lines with `export KEY=value` are loaded under the wrong name |
 | cyx-002 | cyberintel-x | medium | regex | Awesome-Hacking rows whose URL contains parentheses are silently dropped |
 | osint-001 | osint-dashboard | easy | validation | Unicode digits in ?limit= crash the API proxy with a 500 |
-| pmxge-001 | polymarket-x-growth-engine | easy | regex | Validator warns 'no prediction-market anchor' on drafts that quote a percentage |
-| pmxge-002 | polymarket-x-growth-engine | medium | regex | Bare domains like polymarket.com/event/... slip past the no-links rule |
-| pmxge-003 | polymarket-x-growth-engine | easy | regex | Engagement-bait penalty never fires for posts ending in 'Thoughts?' |
-| pmxge-004 | polymarket-x-growth-engine | easy | datetime | reply_fetcher._parse_ts returns naive datetimes for timestamps without an offset |
 | tci-001 | telegram-content-intelligence | easy | url | normalize_url doesn't sort query params, so reordered URLs aren't deduped |
 | tci-002 | telegram-content-intelligence | easy | url | Trailing slash isn't removed when the URL has a query string |
 | tci-003 | telegram-content-intelligence | medium | security | safe_public_https_url accepts shorthand loopback/private IPs like https://127.1/ |
@@ -134,9 +129,9 @@ verified with `python -m i2p verify-tasks`: the hidden test fails on the base co
 #                Ollama (brew install ollama; ollama serve)
 ollama pull huihui_ai/qwen3.5-abliterated:9b
 ./scripts/mac_setup.sh                      # venv, builds the sandbox image, runs `doctor`
-.venv/bin/python -m i2p verify-tasks        # all 20 should print PASS
-.venv/bin/python -m i2p run --task atlas-001            # one task, one run
-.venv/bin/python -m i2p run --runs 3 --run-id qwen9b    # full benchmark: 20 tasks x 3 runs
+.venv/bin/python -m i2p verify-tasks        # all 15 should print PASS
+.venv/bin/python -m i2p run --task arag-001            # one task, one run
+.venv/bin/python -m i2p run --runs 3 --run-id qwen9b    # full benchmark: 15 tasks x 3 runs
 .venv/bin/python scripts/make_table.py runs/qwen9b --readme README.md
 ```
 

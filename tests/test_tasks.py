@@ -8,7 +8,7 @@ EXCLUDED = {"contract-auditor", "auditor-evals"}
 
 def test_task_set_shape():
     tasks = load_tasks(TASKS_DIR)
-    assert 20 <= len(tasks) <= 25
+    assert 15 <= len(tasks) <= 25
     ids = [t.id for t in tasks]
     assert len(ids) == len(set(ids))
     for t in tasks:
